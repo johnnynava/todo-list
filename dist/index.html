@@ -4,9 +4,46 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="main.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="img/favicon.png">
     <title>Todo List</title>
 </head>
 <body>
-    <div id="content"></div>
+    <div id="content">
+        <div id="sidebar">
+            <div id="sidebarTitle">Projects</div>
+            <div class="sidebarProject">Example Project 1</div>
+            <div class="sidebarProject">Example Project 2</div>
+            <div class="sidebarProject">Example Project 3</div>
+            <div class="sidebarAddProject">Add project</div>
+        </div>
+        <div id="sideContent">
+            <div id="project">
+                <div id="projectTitle">Example Project 1</div>
+                <div id="projectButtons"></div>
+            </div>
+            <div id="tasks">
+                <div class="task">
+                    <div class="taskCompletion"></div>
+                    <div class="taskTitle">Task 1</div>
+                    <div class="taskDueDate">25-12-2023</div>
+                    <div class="taskButtons"></div>
+                </div>
+                <div class="task">
+                    <div class="taskCompletion"></div>
+                    <div class="taskTitle">Task 2</div>
+                    <div class="taskDueDate">26-12-2023</div>
+                    <div class="taskButtons"></div>
+                </div>
+                <div class="task">
+                    <div class="taskCompletion"></div>
+                    <div class="taskTitle">Task 3</div>
+                    <div class="taskDueDate">28-12-2023</div>
+                    <div class="taskButtons"></div>
+                </div>
+                <div class="addTaskButton">Add task</div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

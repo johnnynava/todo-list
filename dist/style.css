@@ -1,0 +1,92 @@
+@font-face {
+    font-family: "Roboto";
+    src: url("fonts/Roboto-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("fonts/Roboto-Bold.ttf");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("fonts/Roboto-Italic.ttf");
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "Roboto";
+    src: url("fonts/Roboto-BoldItalic.ttf");
+    font-weight: bold;
+    font-style: italic;
+}
+
+body,html {
+    margin: 0px;
+    font-family: "Roboto";
+    height: 100%;
+}
+
+#content {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 350px 1fr;
+    grid-template-areas: 
+    "sidebar sideContent"
+}
+
+#sidebar {
+    grid-area: sidebar;
+    background-color: rgb(35, 35, 35);
+    display: grid;
+    grid-template-rows: 170px 70px 70px 70px 50px;
+    grid-auto-rows: 100px;
+    align-items: center;
+    text-align: center;
+    padding: 0px 30px;
+}
+
+#sidebarTitle {
+    font-size: 50px;
+    border-bottom: 1px solid rgb(140, 140, 140);
+    height: 100%;
+    display: grid;
+    align-items: center;
+    color: whitesmoke;
+}
+
+.sidebarProject, .sidebarAddProject {
+    color: whitesmoke;
+    font-size: 20px;
+    height: 100%;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+}
+
+.sidebarProject:hover {
+    cursor: pointer;
+    background-color:rgb(25, 106, 66)
+}
+
+.sidebarAddProject {
+    margin-top: 10px;
+    background-color: rgb(96, 2, 2);
+}
+
+#sideContent{
+    grid-area: sideContent;
+    display: grid;
+    grid-template-rows: 170px 1fr;
+    background-color: rgb(61, 61, 61);
+    padding: 0px 40px;
+}
+
+#project {
+    border-bottom: 1px solid rgb(140, 140, 140);
+}
+
+#tasks {    
+}
