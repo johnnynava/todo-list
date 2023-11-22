@@ -40,8 +40,8 @@ body,html {
     grid-area: sidebar;
     background-color: rgb(35, 35, 35);
     display: grid;
-    grid-template-rows: 170px 70px 70px 70px 50px;
-    grid-auto-rows: 100px;
+    grid-template-rows: 170px;
+    grid-auto-rows: 70px;
     align-items: center;
     text-align: center;
     padding: 0px 30px;
@@ -56,10 +56,17 @@ body,html {
     color: whitesmoke;
 }
 
-.sidebarProject, .sidebarAddProject {
+.sidebarProject {
+    height: 100%;
+}
+
+#sidebarAddProject {
+    height: 80%;
+}
+
+.sidebarProject, #sidebarAddProject {
     color: whitesmoke;
     font-size: 20px;
-    height: 100%;
     display: grid;
     align-items: center;
     justify-content: center;
@@ -68,12 +75,16 @@ body,html {
 
 .sidebarProject:hover {
     cursor: pointer;
-    background-color:rgb(25, 106, 66)
+    background-color:rgb(25, 106, 66);
 }
 
-.sidebarAddProject {
+#sidebar > div:nth-child(2){
     margin-top: 10px;
-    background-color: rgb(96, 2, 2);
+}
+
+#sidebarAddProject:hover {
+    cursor:pointer;
+    background-color: rgb(175, 148, 148);
 }
 
 #sideContent{
@@ -86,7 +97,116 @@ body,html {
 
 #project {
     border-bottom: 1px solid rgb(140, 140, 140);
+    display: flex;
+    align-items:center;
+    justify-content: space-between;
 }
 
-#tasks {    
+#projectTitle {
+    color: whitesmoke;
+    font-size: 70px;
+}
+
+#projectButtons {
+    display: flex;
+    gap: 20px;
+}
+
+#projectButtons > img {
+    height: 30px;
+}
+
+#projectButtons > img:hover {
+    cursor:pointer;
+}
+
+#tasks {
+    display: grid;
+    grid-auto-rows: 70px;
+    padding: 20px 0px;
+    gap: 10px;
+}
+
+.task {
+    border: 1px solid rgb(140, 140, 140);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 15px;
+
+}
+
+.taskCompletionFalse,.taskCompletionTrue {
+    border: 0.1px solid rgb(140, 140, 140);
+    height: 50px;
+    width: 50px;
+    border-radius: 50px;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+}
+
+.taskCompletionFalse {
+    color: rgb(61, 61, 61);
+}
+
+.taskCompletionTrue {
+    color: whitesmoke;
+    background-color: rgb(25, 106, 66);
+}
+
+.taskCompletionFalse:hover{
+    cursor:pointer;
+    color: whitesmoke;
+    background-color: rgb(54, 184, 119);
+}
+
+.taskCompletionTrue:hover {
+    cursor: pointer;
+    background-color: rgb(135, 131, 131);
+}
+
+.leftSideTask,.rightSideTask {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.taskTitle{
+    color: whitesmoke;
+    font-size: 25px;
+}
+
+.taskDueDate {
+    color: rgb(237, 200, 200);
+    font-size: 25px;
+    margin-right: 5vw;
+}
+
+.rightSideTask > img {
+    height: 25px;    
+}
+
+.rightSideTask > img:hover {
+    cursor:pointer;
+}
+
+.addTaskButton {
+    display: flex;
+    font-size: 20px;
+    color: whitesmoke;
+    align-items: center;
+    justify-content: center;
+}
+
+.addTaskButton > p {
+    background-color: rgb(175, 148, 148);
+    padding: 10px;
+    border-radius: 15px;
+}
+
+.addTaskButton > p:hover {
+    cursor:pointer;
 }
