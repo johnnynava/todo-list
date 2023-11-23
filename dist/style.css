@@ -182,7 +182,9 @@ body,html {
 .taskDueDate {
     color: rgb(237, 200, 200);
     font-size: 25px;
-    margin-right: 5vw;
+    margin-right: 10px;
+    width: 127px;
+    text-align: center;
 }
 
 .rightSideTask > img {
@@ -209,4 +211,23 @@ body,html {
 
 .addTaskButton > p:hover {
     cursor:pointer;
+}
+
+.LowPrio,.MidPrio,.HighPrio {
+    color: whitesmoke;
+    background-color: blue;
+    padding: 4px 8px;
+    border-radius: 15px;
+}
+
+.LowPrio {
+    background-color: blue;
+}
+
+.MidPrio {
+    background-color: rgb(210, 140, 9);
+}
+
+.HighPrio {
+    background-color: red;
 }
