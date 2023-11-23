@@ -10,6 +10,63 @@
 </head>
 <body>
     <div id="content">
+        <dialog id="addProject">
+            <form action="#" method="post">
+                <div>
+                    <label for="projectName">Project Name</label>
+                    <input id="projectName" type="text" minlength="3" maxlength="45">
+                </div>
+                <button type="submit">Add</button>
+                <button type="button">Cancel</button>
+            </form>
+        </dialog>
+        <dialog id="editProject">
+            <form action="#" method="post">
+                <div>
+                    <label for="editProjectName">Project Name</label>
+                    <input id="editProjectName" type="text" minlength="3" maxlength="25">
+                </div>
+                <button type="submit">Edit</button>
+                <button type="button">Cancel</button>
+            </form>
+        </dialog>
+        <dialog id="addTask">
+            <form action="#" method="post">
+                <div>
+                    <label for="taskName">Task Name</label>
+                    <input id="taskName" type="text" minlength="3" maxlength="45">
+                </div>
+                <div>
+                    <label for="dueDate">Due Date</label>
+                    <input id="dueDate" type="checkbox">
+                </div>
+                <div>
+                    <input type="date" disabled>
+                </div>
+                <div>
+                    <label for="taskDescription">Task Description</label>
+                    <textarea id="taskDescription" maxlength="100"></textarea>
+                </div>
+                <div>
+                    <label for="priority">Priority</label>
+                    <select name="priority" id="priority">
+                        <option value="low" selected="selected">Low Priority</option>
+                        <option value="mid">Medium Priority</option>
+                        <option value="high">High Priority</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit">Add</button>
+                    <button type="button">Cancel</button>
+                </div>
+            </form>
+        </dialog>
+        <dialog id="editTask">
+            
+        </dialog>
+        <dialog id="viewTask">
+
+        </dialog>
         <div id="sidebar">
             <div id="sidebarTitle">Projects</div>
             <div class="sidebarProject">Example Project 1</div>
@@ -32,7 +89,9 @@
                         <div class="taskTitle">Example task 1</div>
                     </div>
                     <div class="rightSideTask">
+                        <div class="HighPrio">High Priority</div>
                         <div class="taskDueDate">25-12-2023</div>
+                        <img src="img/view.png">
                         <img src="img/edit.png">
                         <img src="img/delete.png">
                     </div>
@@ -43,7 +102,9 @@
                         <div class="taskTitle">Example task 2</div>
                     </div>
                     <div class="rightSideTask">
+                        <div class="MidPrio">Medium Priority</div>
                         <div class="taskDueDate">28-12-2023</div>
+                        <img src="img/view.png">
                         <img src="img/edit.png">
                         <img src="img/delete.png">
                     </div>
@@ -54,7 +115,9 @@
                         <div class="taskTitle">Example task 3</div>
                     </div>
                     <div class="rightSideTask">
-                        <div class="taskDueDate">14-02-2024</div>
+                        <div class="LowPrio">Low Priority</div>
+                        <div class="taskDueDate">N/A</div>
+                        <img src="img/view.png">
                         <img src="img/edit.png">
                         <img src="img/delete.png">
                     </div>
