@@ -52,6 +52,8 @@ class Project {
     }
 };
 
+
+
 class List {
     constructor(){
         this.projects = [];
@@ -75,20 +77,12 @@ class List {
 let list = new List();
 list.createProject("Example Project");
 //created new task example
-list.projects[0].createTask("Example Task", "This is just an example","16-11-2023","Low");
+list.projects[0].createTask("Example Task 1", "This is just an example","25-12-2023","High");
 //set task as complete example
 list.projects[0].tasks[0].toggleComplete();
-//edit task title example
-list.projects[0].tasks[0].changeTitle("not example");
-// //edit task description example
-list.projects[0].tasks[0].changeDescription("this is not an example");
-// //edit task due date example
-list.projects[0].tasks[0].changeDueDate("18-11-2023");
-// //edit task priority example
-list.projects[0].tasks[0].changePriority("High");
-//delete task example
-list.projects[0].deleteTask(list.projects[0].tasks[0].id);
-//create new task again example
-list.projects[0].createTask("Second Task", "This is just a second example example","16-11-2023","High");
+//create other example tasks
+list.projects[0].createTask("Example Task 2", "This is just another example","28-12-2023","Medium");
+list.projects[0].createTask("Example Task 3", "","N/A","Low");
+list.createProject("Example Project 2");
 
 export { Task, Project, List, list };

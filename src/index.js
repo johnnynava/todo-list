@@ -1,4 +1,5 @@
 import { Task, Project, List, list } from './todo-logic.js'
+import { loopProjects, loopTasks } from './dom-manipulation.js';
 
-console.log(list.projects[0]);
-console.log("test");
+list.projects.forEach(loopProjects);
+list.projects[0].tasks.forEach(loopTasks);
