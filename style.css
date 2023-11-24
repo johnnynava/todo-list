@@ -47,6 +47,13 @@ body,html {
     padding: 0px 30px;
 }
 
+#sidebarProjects {
+    display: grid;
+    grid-template-rows: 170px;
+    grid-auto-rows: 70px;
+
+}
+
 #sidebarTitle {
     font-size: 50px;
     border-bottom: 1px solid rgb(140, 140, 140);
@@ -213,21 +220,21 @@ body,html {
     cursor:pointer;
 }
 
-.LowPrio,.MidPrio,.HighPrio {
+.lowPrio,.midPrio,.highPrio {
     color: whitesmoke;
     background-color: blue;
     padding: 4px 8px;
     border-radius: 15px;
 }
 
-.LowPrio {
+.lowPrio {
     background-color: blue;
 }
 
-.MidPrio {
+.midPrio {
     background-color: rgb(210, 140, 9);
 }
 
-.HighPrio {
+.highPrio {
     background-color: red;
 }
