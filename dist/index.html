@@ -38,7 +38,7 @@
                 </div>
                 <div>
                     <label for="dueDate">Due Date</label>
-                    <input id="dueDate" type="checkbox">
+                    <input id="dueDate" type="checkbox" checked>
                 </div>
                 <div>
                     <input type="date" disabled>
@@ -62,10 +62,56 @@
             </form>
         </dialog>
         <dialog id="editTask">
-            
+            <form action="#" method="post">
+                <div>
+                    <label for="editTaskName">Task Name</label>
+                    <input id="editTaskName" type="text" minlength="3" maxlength="45">
+                </div>
+                <div>
+                    <label for="editDueDate">Due Date</label>
+                    <input id="editDueDate" type="checkbox" checked>
+                </div>
+                <div>
+                    <input type="date" disabled>
+                </div>
+                <div>
+                    <label for="editTaskDescription">Task Description</label>
+                    <textarea id="editTaskDescription" maxlength="100"></textarea>
+                </div>
+                <div>
+                    <label for="editPriority">Priority</label>
+                    <select name="editPriority" id="editPriority">
+                        <option value="low" selected="selected">Low Priority</option>
+                        <option value="mid">Medium Priority</option>
+                        <option value="high">High Priority</option>
+                    </select>
+                </div>
+                <div>
+                    <button type="submit">Edit</button>
+                    <button type="button">Cancel</button>
+                </div>
+            </form>
         </dialog>
         <dialog id="viewTask">
-
+            <div id="viewTask">
+                <div id="viewTaskName">
+                 <div>Task name</div>
+                 <div></div>
+                </div>
+                <div id="viewDueDate">
+                    <div>N/A</div>
+                    <div></div>
+                </div>
+                <div id="viewTaskDescription">
+                    <div>Task Description</div>
+                    <div></div>
+                </div>
+                <div id="viewPriority">
+                    <div>Priority</div>
+                    <div></div>
+                </div>
+                <button type="button">Exit</button>
+            </div>
         </dialog>
         <div id="sidebar">
             <div id="sidebarTitle">Projects</div>
