@@ -293,7 +293,7 @@ body,html {
 #addProject > form > button[type=button],
 #editProject > form > button[type=button]{
     grid-area: cancel;
-    background-color: red;
+    background-color: darkred;
 }
 
 #addProject > form > div > label,
@@ -312,4 +312,49 @@ body,html {
 
 .selectedProject {
     background-color:rgb(25, 106, 66);
+}
+
+#deleteProject {
+    width: 50vw;
+    height: 18vh;
+    background-color: rgb(35, 35, 35);
+    color: whitesmoke;
+    border: 0px;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+#deleteProject > div {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr 1fr; 
+    grid-template-areas: 
+    "div div"
+    "delete cancel";
+    gap: 20px;
+}
+
+#deleteProject > div > div {
+    grid-area: div;
+    font-size: 30px;
+    text-align: center;
+}
+
+#deleteProject > div > button {
+    cursor: pointer;
+    color: whitesmoke;
+    border-style: none;
+    border-radius: 10px;
+    font-size: 30px;
+    padding: 10px 30px;
+}
+
+#deleteProjectDeleteBtn {
+    grid-area: delete;
+    background-color: darkred;
+}
+
+#deleteProjectCancelBtn {
+    grid-area: cancel;
+    background-color: green;
 }
