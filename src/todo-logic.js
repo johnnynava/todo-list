@@ -75,7 +75,7 @@ class List {
 let list = new List();
 list.createProject("Example Project");
 //created new task example
-list.projects[0].createTask("Example Task 1", "This is just an example","25-12-2023","High");
+list.projects[0].createTask("Example Task 1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut etiam sit amet nisl purus in mollis nunc. Tincidunt id aliquet risus feugiat in ante metus dictum at. Egestas fringilla phasellus faucibus scelerisque eleifend donec. At ultrices mi tempus imperdiet nulla malesuada. Adipiscing commodo elit at imperdiet dui accumsan sit amet. At erat pellentesque adipiscing commodo.","25-12-2023","High");
 //set task as complete example
 list.projects[0].tasks[0].toggleComplete();
 //create other example tasks

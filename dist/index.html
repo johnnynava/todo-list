@@ -37,6 +37,13 @@
                 <button id="deleteProjectCancelBtn">Cancel</button>
             </div>
         </dialog>
+        <dialog id="deleteTask">
+            <div>
+                <div>Are you sure you want to permanently delete this task?</div>
+                <button id="deleteTaskDeleteBtn">Delete</button>
+                <button id="deleteTaskCancelBtn">Cancel</button>
+            </div>
+        </dialog>
         <dialog id="addTask">
             <form action="#" method="post">
                 <div>
@@ -52,7 +59,7 @@
                 </div>
                 <div>
                     <label for="taskDescription">Task Description</label>
-                    <textarea id="taskDescription" maxlength="100"></textarea>
+                    <textarea id="taskDescription" maxlength="455"></textarea>
                 </div>
                 <div>
                     <label for="priority">Priority</label>
@@ -83,7 +90,7 @@
                 </div>
                 <div>
                     <label for="editTaskDescription">Task Description</label>
-                    <textarea id="editTaskDescription" maxlength="100"></textarea>
+                    <textarea id="editTaskDescription" maxlength="455"></textarea>
                 </div>
                 <div>
                     <label for="editPriority">Priority</label>
@@ -100,22 +107,21 @@
             </form>
         </dialog>
         <dialog id="viewTask">
-            <div id="viewTask">
+            <div id="viewTaskDiv">
                 <div id="viewTaskName">
-                 <div>Task name</div>
-                 <div></div>
+                 <div id="viewTaskNameTitle">Task name</div>
+                 <div id="viewTaskNameValue"></div>
                 </div>
                 <div id="viewDueDate">
-                    <div>N/A</div>
-                    <div></div>
+                    <div id="viewDueDateTitle">Due Date</div>
+                    <div id="viewDueDateValue"></div>
                 </div>
                 <div id="viewTaskDescription">
-                    <div>Task Description</div>
-                    <div></div>
+                    <div id="viewTaskDescriptionTitle">Task Description</div>
+                    <div id="viewTaskDescriptionValue"></div>
                 </div>
                 <div id="viewPriority">
-                    <div>Priority</div>
-                    <div></div>
+                    <div id="viewPriorityValue"></div>
                 </div>
                 <button type="button">Exit</button>
             </div>

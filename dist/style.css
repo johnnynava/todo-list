@@ -314,7 +314,8 @@ body,html {
     background-color:rgb(25, 106, 66);
 }
 
-#deleteProject {
+#deleteProject,
+#deleteTask {
     width: 50vw;
     height: 18vh;
     background-color: rgb(35, 35, 35);
@@ -324,7 +325,8 @@ body,html {
     border-radius: 10px;
 }
 
-#deleteProject > div {
+#deleteProject > div,
+#deleteTask > div {
     display: grid;
     grid-template-rows: 1fr 1fr;
     grid-template-columns: 1fr 1fr; 
@@ -334,13 +336,15 @@ body,html {
     gap: 20px;
 }
 
-#deleteProject > div > div {
+#deleteProject > div > div,
+#deleteTask > div > div {
     grid-area: div;
     font-size: 30px;
     text-align: center;
 }
 
-#deleteProject > div > button {
+#deleteProject > div > button,
+#deleteTask > div > button {
     cursor: pointer;
     color: whitesmoke;
     border-style: none;
@@ -349,12 +353,101 @@ body,html {
     padding: 10px 30px;
 }
 
-#deleteProjectDeleteBtn {
+#deleteProjectDeleteBtn,
+#deleteTaskDeleteBtn {
     grid-area: delete;
     background-color: darkred;
 }
 
-#deleteProjectCancelBtn {
+#deleteProjectCancelBtn,
+#deleteTaskCancelBtn {
     grid-area: cancel;
     background-color: green;
+}
+
+#viewTask {
+    width: 80vw;
+    height: 70vh;
+    background-color: rgb(35, 35, 35);
+    color: whitesmoke;
+    border: 0px;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+#viewTaskDiv {
+    height: 100%;
+    display: grid;
+    grid-template-rows: 1fr 3fr 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "name date"
+    "description description"
+    "priority exit";
+}
+
+
+#viewTaskName {
+    grid-area: name;
+}
+
+#viewTaskName,
+#viewDueDate,
+#viewTaskDescriptionTitle,
+#viewPriority{
+    font-size: 40px;
+}
+
+
+#viewTaskNameTitle,
+#viewDueDateTitle,
+#viewTaskDescriptionTitle,
+#viewPriority {
+    color: rgb(141, 141, 141);
+}
+
+
+#viewDueDate {
+    grid-area: date;
+}
+
+#viewDueDateValue{
+    color: rgb(237, 200, 200);
+}
+
+#viewTaskDescription {
+    grid-area: description;
+}
+
+#viewPriority {
+    grid-area: priority;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+#viewPriorityValue {
+    text-align: center;
+}
+
+#viewTaskDiv > button {
+    grid-area: exit;
+    cursor: pointer;
+    color: whitesmoke;
+    border-style: none;
+    border-radius: 15px;
+    font-size: 30px;
+    padding: 10px 30px;
+    background-color: rgb(61, 61, 61);
+    display: grid;
+    align-self: center;
+}
+
+#viewTaskDescriptionValue {
+    margin-top: 15px;
+    font-size: 30px;
+    background-color: rgb(61, 61, 61);
+    height: 75%;
+    border-radius: 15px;
+    padding: 15px 10px;
 }

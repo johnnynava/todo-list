@@ -19,10 +19,25 @@ const deleteProjectDeleteBtn =  document.querySelector("#deleteProjectDeleteBtn"
 const deleteProjectCancelBtn = document.querySelector("#deleteProjectCancelBtn");
 const sideContent = document.querySelector("#sideContent");
 let projectTitle = document.querySelector("#projectTitle");
-let taskCompletion = document.querySelectorAll(".completionStatus")
+let taskCompletion = document.querySelectorAll(".completionStatus");
+const viewTask = document.querySelector("#viewTask");
+const viewTaskNameValue = document.querySelector("#viewTaskNameValue");
+const viewDueDateValue = document.querySelector("#viewDueDateValue");
+const viewTaskDescriptionValue = document.querySelector("#viewTaskDescriptionValue");
+const viewPriorityValue = document.querySelector("#viewPriorityValue");
+const viewTaskExitBtn = document.querySelector("#viewTaskDiv > button");
+const addTask = document.querySelector("#addTask");
+const editTask = document.querySelector("#editTask");
+const deleteTask = document.querySelector("#deleteTask");
+let deleteTaskButtons = document.querySelectorAll('.rightSideTask > img[src="img/delete.png"]');
+const deleteTaskDeleteBtn = document.querySelector("#deleteTaskDeleteBtn");
+const deleteTaskCancelBtn = document.querySelector("#deleteTaskCancelBtn");
 
+
+let viewTaskButtons;
 let sidebarProjects;
 let selectedProjectIndex = 0;
+let selectedTaskIndex;
 
 const createProjectTitle = () => {
     projectTitle.value = list.projects[selectedProjectIndex].id;
@@ -59,6 +74,8 @@ const addEventListenerToProjects = () => {
         selectedProjectIndex = list.projects.indexOf(selectedObject);
         cleanOldTasks();
         list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
+        addEventListenerToViewTasks();
+        addEventListenerToDeleteTaskButtons();
         addEventListenerToTaskCompletion();
         createProjectTitle();
         removeSelectedProject();
@@ -79,6 +96,8 @@ const addEventListenerToTaskCompletion = () => {
         console.log(task.value);
         cleanOldTasks();
         list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
+        addEventListenerToViewTasks();
+        addEventListenerToDeleteTaskButtons();
         addEventListenerToTaskCompletion();
     }))
 };
@@ -140,15 +159,19 @@ const loopTasks = (task) => {
     taskSideRight.appendChild(taskDueDate);
     let viewImage = document.createElement("img");
     viewImage.setAttribute("src","img/view.png");
+    viewImage.value = task.id;
     let editImage = document.createElement("img");
     editImage.setAttribute("src","img/edit.png");
+    editImage.value = task.id;
     let deleteImage = document.createElement("img");
+    deleteImage.value = task.id;
     deleteImage.setAttribute("src","img/delete.png");
     taskSideRight.appendChild(viewImage);
     taskSideRight.appendChild(editImage);
     taskSideRight.appendChild(deleteImage);
     addTaskButton.remove();
     tasks.appendChild(addTaskButton);
+    addEventListenerToAddTaskBtn();
 }
 
 addProjectButton.addEventListener("click", () => {
@@ -206,6 +229,7 @@ addProjectAddBtn.addEventListener("click", (e) => {
     list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
     addEventListenerToTaskCompletion();
     cleanOldProjectsSidebar();
+    addEventListenerToDeleteTaskButtons();
     //add projects back to sidebar
     list.projects.forEach(loopProjects);
     addSelectedProjectAfterAddingNewProject();
@@ -256,7 +280,9 @@ deleteProjectDeleteBtn.addEventListener("click", () => {
     else {
         createProjectTitle();
         list.projects[0].tasks.forEach(loopTasks);
+        addEventListenerToViewTasks();
         addEventListenerToTaskCompletion();
+        addEventListenerToDeleteTaskButtons();
     }
     addSelectedProjectAfterAddingNewProject();
 });
@@ -269,10 +295,84 @@ const deleteSideContent = () => {
     sideContent.innerHTML = "";
 }
 
-// Next is finishing DOM manipulation for tasks and then I just need to
-// add some sort of storing data technique for saved projects to persist
-// through reloads.
-// I also need to keep in mind to make an event listener for marking tasks
-// as completed! 
+const addEventListenerToViewTasks = () => {
+    viewTaskButtons = document.querySelectorAll('.rightSideTask > img[src="img/view.png"]');
+    viewTaskButtons.forEach(viewBtn => viewBtn.addEventListener("click", () => {
+        viewTask.showModal();
+        list.projects[selectedProjectIndex].tasks.forEach(task => {
+            if(task.id === viewBtn.value){
+                viewTaskNameValue.textContent = task.title;
+                viewDueDateValue.textContent = task.dueDate;
+                viewTaskDescriptionValue.textContent = task.description;
+                if (task.priority === "High"){
+                    viewPriorityValue.classList.remove("midPrio");
+                    viewPriorityValue.classList.remove("lowPrio");
+                    viewPriorityValue.classList.add("highPrio");
+                    viewPriorityValue.textContent = "High Priority";
+                }
+                else if(task.priority === "Medium"){
+                    viewPriorityValue.classList.remove("highPrio");
+                    viewPriorityValue.classList.remove("lowPrio");
+                    viewPriorityValue.classList.add("midPrio");
+                    viewPriorityValue.textContent = "Medium Priority";
+                }
+                else if(task.priority === "Low"){
+                    viewPriorityValue.classList.remove("highPrio");
+                    viewPriorityValue.classList.remove("midPrio");
+                    viewPriorityValue.classList.remove();
+                    viewPriorityValue.classList.add("lowPrio");
+                    viewPriorityValue.textContent = "Low Priority";
+                }
+            }
+        })
+        addEventListenerToViewTasks();
+    }))
+}
 
-export { loopProjects, loopTasks, addEventListenerToProjects, createProjectTitle, addSelectedProjectPageLoad, addEventListenerToTaskCompletion };
+viewTaskExitBtn.addEventListener("click",() => {
+    viewTask.close()
+});
+
+
+const addEventListenerToAddTaskBtn = () => {
+    addTaskButton = document.querySelector(".addTaskButton");
+    addTaskButton.addEventListener("click",() =>{
+        addTask.showModal();
+
+    })
+}
+
+
+// editTask
+
+
+const addEventListenerToDeleteTaskButtons = () => {
+    deleteTaskButtons = document.querySelectorAll('.rightSideTask > img[src="img/delete.png"]');
+    deleteTaskButtons.forEach(button => button.addEventListener("click", () => {
+        let selectedTask;
+        deleteTask.showModal();
+        list.projects[selectedProjectIndex].tasks.forEach(task => {
+            if(task.id === button.value){
+                selectedTask = task;
+            }
+        })
+        selectedTaskIndex = list.projects[selectedProjectIndex].tasks.indexOf(selectedTask);
+        console.log(selectedTaskIndex);
+    }))
+}
+
+deleteTaskDeleteBtn.addEventListener("click",()=>{
+    deleteTask.close();
+    list.projects[selectedProjectIndex].tasks.splice(selectedTaskIndex,1);
+    cleanOldTasks();
+    list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
+    addEventListenerToViewTasks();
+    addEventListenerToDeleteTaskButtons();
+    addEventListenerToTaskCompletion();
+})
+
+deleteTaskCancelBtn.addEventListener("click",()=>{
+    deleteTask.close();
+})
+
+export { loopProjects, loopTasks, addEventListenerToProjects, createProjectTitle, addSelectedProjectPageLoad, addEventListenerToTaskCompletion, addEventListenerToViewTasks, addEventListenerToDeleteTaskButtons };
