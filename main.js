@@ -103,6 +103,7 @@ list.createProject("Example Project 2");
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   addEventListenerToProjects: () => (/* binding */ addEventListenerToProjects),
+/* harmony export */   addEventListenerToTaskCompletion: () => (/* binding */ addEventListenerToTaskCompletion),
 /* harmony export */   addSelectedProjectPageLoad: () => (/* binding */ addSelectedProjectPageLoad),
 /* harmony export */   createProjectTitle: () => (/* binding */ createProjectTitle),
 /* harmony export */   loopProjects: () => (/* binding */ loopProjects),
@@ -130,11 +131,10 @@ const deleteProjectDeleteBtn =  document.querySelector("#deleteProjectDeleteBtn"
 const deleteProjectCancelBtn = document.querySelector("#deleteProjectCancelBtn");
 const sideContent = document.querySelector("#sideContent");
 let projectTitle = document.querySelector("#projectTitle");
+let taskCompletion = document.querySelectorAll(".completionStatus")
 
 let sidebarProjects;
 let selectedProjectIndex = 0;
-
-
 
 const createProjectTitle = () => {
     projectTitle.value = _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].id;
@@ -171,11 +171,29 @@ const addEventListenerToProjects = () => {
         selectedProjectIndex = _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects.indexOf(selectedObject);
         cleanOldTasks();
         _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
+        addEventListenerToTaskCompletion();
         createProjectTitle();
         removeSelectedProject();
         project.classList.add("selectedProject");
     }))
 }
+
+
+
+const addEventListenerToTaskCompletion = () => {
+    taskCompletion = document.querySelectorAll(".completionStatus");
+    taskCompletion.forEach(task => task.addEventListener("click",() => {
+        _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks.forEach(indTask => {
+            if(indTask.id == task.value){
+                indTask.toggleComplete();
+            }
+        })
+        console.log(task.value);
+        cleanOldTasks();
+        _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
+        addEventListenerToTaskCompletion();
+    }))
+};
 
 //Loops the list to add new projects to the sidebar
 const loopProjects = (project) => {
@@ -200,6 +218,7 @@ const loopTasks = (task) => {
     taskSide.appendChild(taskSideLeft);
     taskSide.appendChild(taskSideRight);
     let taskCompletion = document.createElement("div");
+    taskCompletion.value = task.id;
     taskCompletion.textContent = "✔";
     if (task.complete === true){
         taskCompletion.classList.add("taskCompletionTrue");
@@ -207,6 +226,7 @@ const loopTasks = (task) => {
     else if (task.complete === false){
         taskCompletion.classList.add("taskCompletionFalse");
     }
+    taskCompletion.classList.add("completionStatus");
     taskSideLeft.appendChild(taskCompletion);
     let taskTitle = document.createElement("div");
     taskTitle.classList.add("taskTitle");
@@ -296,6 +316,7 @@ addProjectAddBtn.addEventListener("click", (e) => {
     createProjectTitle();
     cleanOldTasks();
     _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
+    addEventListenerToTaskCompletion();
     cleanOldProjectsSidebar();
     //add projects back to sidebar
     _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects.forEach(loopProjects);
@@ -347,6 +368,7 @@ deleteProjectDeleteBtn.addEventListener("click", () => {
     else {
         createProjectTitle();
         _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[0].tasks.forEach(loopTasks);
+        addEventListenerToTaskCompletion();
     }
     addSelectedProjectAfterAddingNewProject();
 });
@@ -358,6 +380,12 @@ deleteProjectCancelBtn.addEventListener("click", () => {
 const deleteSideContent = () => {
     sideContent.innerHTML = "";
 }
+
+// Next is finishing DOM manipulation for tasks and then I just need to
+// add some sort of storing data technique for saved projects to persist
+// through reloads.
+// I also need to keep in mind to make an event listener for marking tasks
+// as completed! 
 
 
 
@@ -432,6 +460,7 @@ _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects.forEach(_dom_manipulat
 _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[0].tasks.forEach(_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.loopTasks);
 (0,_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.createProjectTitle)();
 (0,_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.addSelectedProjectPageLoad)();
+(0,_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.addEventListenerToTaskCompletion)();
 })();
 
 /******/ })()
