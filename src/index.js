@@ -1,5 +1,8 @@
-import { Task, Project, List, list } from './todo-logic.js'
-import { loopProjects, loopTasks } from './dom-manipulation.js';
+import { list } from './todo-logic.js'
+import { loopProjects, loopTasks, addEventListenerToProjects, createProjectTitle, addSelectedProjectPageLoad } from './dom-manipulation.js';
 
 list.projects.forEach(loopProjects);
+addEventListenerToProjects();
 list.projects[0].tasks.forEach(loopTasks);
+createProjectTitle();
+addSelectedProjectPageLoad();

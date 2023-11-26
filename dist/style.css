@@ -238,3 +238,78 @@ body,html {
 .highPrio {
     background-color: red;
 }
+
+#addProject,
+#editProject {
+    width: 50vw;
+    height: 20vh;
+    background-color: rgb(35, 35, 35);
+    color: whitesmoke;
+    border: 0px;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+#addProject > form,
+#editProject > form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 3fr 1fr;
+    grid-template-areas: 
+    "projectName projectName"
+    "addB cancel";
+    height: 100%;
+    gap: 20px;
+}
+
+#addProject > form > div,
+#editProject > form > div {
+    grid-area:projectName;
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+}
+
+#addProject > form > button,
+#editProject > form > button {
+    background-color: rgb(61, 61, 61);
+    color: whitesmoke;
+    border-style: none;
+    border-radius: 10px;
+    font-size: 30px;
+    padding: 10px 30px;
+}
+
+#addProject > form > button:hover,
+#editProject > form > button:hover{
+    cursor: pointer;
+}
+
+#addProject > form > button[type=submit],
+#editProject > form > button[type=submit]{
+    grid-area: addB;
+    background-color: green;
+}
+
+#addProject > form > button[type=button],
+#editProject > form > button[type=button]{
+    grid-area: cancel;
+    background-color: red;
+}
+
+#addProject > form > div > label,
+#editProject > form > div > label {
+    font-size: 30px;
+}
+
+#addProject > form > div > input,
+#editProject > form > div > input {
+    background-color: rgb(61, 61, 61);
+    color: whitesmoke;
+    font-size: 20px;
+    border-radius: 10px;
+    border-style: none;
+}
+
+.selectedProject {
+    background-color:rgb(25, 106, 66);
+}

@@ -7,9 +7,6 @@
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   List: () => (/* binding */ List),
-/* harmony export */   Project: () => (/* binding */ Project),
-/* harmony export */   Task: () => (/* binding */ Task),
 /* harmony export */   list: () => (/* binding */ list)
 /* harmony export */ });
 class Task {
@@ -66,8 +63,6 @@ class Project {
     }
 };
 
-
-
 class List {
     constructor(){
         this.projects = [];
@@ -107,21 +102,87 @@ list.createProject("Example Project 2");
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   addEventListenerToProjects: () => (/* binding */ addEventListenerToProjects),
+/* harmony export */   addSelectedProjectPageLoad: () => (/* binding */ addSelectedProjectPageLoad),
+/* harmony export */   createProjectTitle: () => (/* binding */ createProjectTitle),
 /* harmony export */   loopProjects: () => (/* binding */ loopProjects),
 /* harmony export */   loopTasks: () => (/* binding */ loopTasks)
 /* harmony export */ });
-// import { list } from './todo-logic.js'
+/* harmony import */ var _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(1);
+
 
 const sidebar = document.querySelector("#sidebar");
-const tasks = document.querySelector("#tasks");
+let tasks = document.querySelector("#tasks");
 const addProjectButton = document.querySelector("#sidebarAddProject");
-const addTaskButton = document.querySelector(".addTaskButton")
+let editProjectButton = document.querySelector('#projectButtons > img[src="img/edit.png"]');
+let addTaskButton = document.querySelector(".addTaskButton");
+const addProject = document.querySelector("#addProject");
+const editProject = document.querySelector("#editProject");
+const editProjectInput = document.querySelector("#editProject > form > div input");
+const editProjectAddBtn = document.querySelector("#editProject > form > button[type=submit]");
+const editrojectCancelBtn = document.querySelector("#editProject > form > button[type=button]");
+const addProjectAddBtn = document.querySelector("#addProject > form > button[type=submit]");
+const addProjectCancelBtn = document.querySelector("#addProject > form > button[type=button]");
+const addProjectInput = document.querySelector("#addProject > form > div > input");
+let deleteProjectBtn = document.querySelector('#projectButtons > img[src="img/delete.png"]');
+const deleteProject = document.querySelector("#deleteProject");
+const deleteProjectDeleteBtn =  document.querySelector("#deleteProjectDeleteBtn");
+const deleteProjectCancelBtn = document.querySelector("#deleteProjectCancelBtn");
+const sideContent = document.querySelector("#sideContent");
+let projectTitle = document.querySelector("#projectTitle");
+
+let sidebarProjects;
+let selectedProjectIndex = 0;
+
+
+
+const createProjectTitle = () => {
+    projectTitle.value = _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].id;
+    projectTitle.textContent = _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].name;
+}
+
+const cleanOldProjectsSidebar = () => {
+    document.querySelectorAll(".sidebarProject").forEach(project => project.remove()); 
+}
+
+const cleanOldTasks = () => {
+    document.querySelectorAll(".task").forEach(task => task.remove());
+}
+
+const removeSelectedProject = () => {
+    sidebarProjects = document.querySelectorAll(".sidebarProject");
+    sidebarProjects.forEach(project => project.classList.remove("selectedProject"));
+}
+
+const addSelectedProjectPageLoad = () => {
+    sidebarProjects = document.querySelectorAll(".sidebarProject");
+    sidebarProjects[0].classList.add("selectedProject");
+}
+
+const addEventListenerToProjects = () => {
+    sidebarProjects = document.querySelectorAll(".sidebarProject");
+    sidebarProjects.forEach(project => project.addEventListener("click", (e) => {
+        let selectedObject;
+        _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects.forEach(project => {
+            if(project.id === e.target.value){
+                selectedObject = project;
+            }
+        })
+        selectedProjectIndex = _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects.indexOf(selectedObject);
+        cleanOldTasks();
+        _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
+        createProjectTitle();
+        removeSelectedProject();
+        project.classList.add("selectedProject");
+    }))
+}
 
 //Loops the list to add new projects to the sidebar
 const loopProjects = (project) => {
     let projectSidebar = document.createElement("div");
     projectSidebar.classList.add("sidebarProject");
     projectSidebar.textContent = project.name;
+    projectSidebar.value = project.id;
     addProjectButton.remove();
     sidebar.appendChild(projectSidebar);
     sidebar.appendChild(addProjectButton);
@@ -180,6 +241,122 @@ const loopTasks = (task) => {
     taskSideRight.appendChild(deleteImage);
     addTaskButton.remove();
     tasks.appendChild(addTaskButton);
+}
+
+addProjectButton.addEventListener("click", () => {
+    addProject.showModal();
+})
+
+const addSelectedProjectAfterAddingNewProject = () => {
+    sidebarProjects = document.querySelectorAll(".sidebarProject");
+    sidebarProjects.forEach(project => {
+        if (project.value === projectTitle.value){
+            project.classList.add("selectedProject");
+        }
+    })
+}
+
+addProjectAddBtn.addEventListener("click", (e) => {
+    if(_todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects.length === 0){
+        let projectDiv = document.createElement("div");
+        projectDiv.setAttribute("id","project");
+        sideContent.appendChild(projectDiv);
+        let projectTitleDiv = document.createElement("div");
+        projectTitleDiv.setAttribute("id","projectTitle");        
+        projectDiv.appendChild(projectTitleDiv);
+        let projectButtonsDiv = document.createElement("div");
+        projectButtonsDiv.setAttribute("id","projectButtons");  
+        projectDiv.appendChild(projectButtonsDiv);
+        let editImage = document.createElement("img");
+        let deleteImage = document.createElement("img");      
+        editImage.setAttribute("src","img/edit.png");
+        deleteImage.setAttribute("src","img/delete.png");
+        projectButtonsDiv.appendChild(editImage);
+        projectButtonsDiv.appendChild(deleteImage);
+        let tasksDiv = document.createElement("div");
+        tasksDiv.setAttribute("id","tasks");
+        sideContent.appendChild(tasksDiv);
+        let addTaskDiv = document.createElement("div");
+        addTaskDiv.classList.add("addTaskButton");
+        tasksDiv.appendChild(addTaskDiv);
+        let p = document.createElement("p");
+        p.textContent = "Add task";
+        addTaskDiv.appendChild(p);
+        deleteProjectBtn = document.querySelector('#projectButtons > img[src="img/delete.png"]');
+        editProjectButton = document.querySelector('#projectButtons > img[src="img/edit.png"]');
+        projectTitle = document.querySelector("#projectTitle");
+        tasks = document.querySelector("#tasks");
+        addTaskButton = document.querySelector(".addTaskButton");
+    }
+    e.preventDefault();
+    _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.createProject(addProjectInput.value);
+    addProject.close();
+    addProjectInput.value = "";
+    selectedProjectIndex = _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects.length-1;
+    createProjectTitle();
+    cleanOldTasks();
+    _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
+    cleanOldProjectsSidebar();
+    //add projects back to sidebar
+    _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects.forEach(loopProjects);
+    addSelectedProjectAfterAddingNewProject();
+    addEventListenerToProjects();
+})
+
+addProjectCancelBtn.addEventListener("click", () => {
+    addProject.close();
+    addProjectInput.value = "";
+})
+
+editProjectButton.addEventListener("click", () => {
+    editProject.showModal();
+    editProjectInput.value = projectTitle.textContent;
+})
+
+editProjectAddBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    editProject.close();
+    projectTitle.textContent = editProjectInput.value;
+    _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].name = editProjectInput.value;
+    cleanOldProjectsSidebar();
+    _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects.forEach(loopProjects);
+    addEventListenerToProjects();
+    addSelectedProjectAfterAddingNewProject();
+})
+
+editrojectCancelBtn.addEventListener("click", () => {
+    editProject.close();
+    editProjectInput.value = "";
+})
+
+deleteProjectBtn.addEventListener("click", () => {
+    deleteProject.showModal();
+})
+
+deleteProjectDeleteBtn.addEventListener("click", () => {
+    _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects.splice(selectedProjectIndex, 1);
+    cleanOldProjectsSidebar();
+    _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects.forEach(loopProjects);
+    addEventListenerToProjects();
+    deleteProject.close();
+    cleanOldTasks();
+    selectedProjectIndex = 0;
+    if(_todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects.length === 0){
+        deleteSideContent();
+    }
+    else {
+        createProjectTitle();
+        _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[0].tasks.forEach(loopTasks);
+    }
+    addSelectedProjectAfterAddingNewProject();
+});
+
+deleteProjectCancelBtn.addEventListener("click", () => {
+    deleteProject.close();
+})
+
+const deleteSideContent = () => {
+    sideContent.innerHTML = "";
 }
 
 
@@ -251,7 +428,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects.forEach(_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.loopProjects);
+(0,_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.addEventListenerToProjects)();
 _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[0].tasks.forEach(_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.loopTasks);
+(0,_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.createProjectTitle)();
+(0,_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.addSelectedProjectPageLoad)();
 })();
 
 /******/ })()

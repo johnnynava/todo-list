@@ -52,8 +52,6 @@ class Project {
     }
 };
 
-
-
 class List {
     constructor(){
         this.projects = [];
@@ -85,4 +83,4 @@ list.projects[0].createTask("Example Task 2", "This is just another example","28
 list.projects[0].createTask("Example Task 3", "","N/A","Low");
 list.createProject("Example Project 2");
 
-export { Task, Project, List, list };
+export { list };
