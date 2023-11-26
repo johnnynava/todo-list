@@ -19,11 +19,10 @@ const deleteProjectDeleteBtn =  document.querySelector("#deleteProjectDeleteBtn"
 const deleteProjectCancelBtn = document.querySelector("#deleteProjectCancelBtn");
 const sideContent = document.querySelector("#sideContent");
 let projectTitle = document.querySelector("#projectTitle");
+let taskCompletion = document.querySelectorAll(".completionStatus")
 
 let sidebarProjects;
 let selectedProjectIndex = 0;
-
-
 
 const createProjectTitle = () => {
     projectTitle.value = list.projects[selectedProjectIndex].id;
@@ -60,11 +59,29 @@ const addEventListenerToProjects = () => {
         selectedProjectIndex = list.projects.indexOf(selectedObject);
         cleanOldTasks();
         list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
+        addEventListenerToTaskCompletion();
         createProjectTitle();
         removeSelectedProject();
         project.classList.add("selectedProject");
     }))
 }
+
+
+
+const addEventListenerToTaskCompletion = () => {
+    taskCompletion = document.querySelectorAll(".completionStatus");
+    taskCompletion.forEach(task => task.addEventListener("click",() => {
+        list.projects[selectedProjectIndex].tasks.forEach(indTask => {
+            if(indTask.id == task.value){
+                indTask.toggleComplete();
+            }
+        })
+        console.log(task.value);
+        cleanOldTasks();
+        list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
+        addEventListenerToTaskCompletion();
+    }))
+};
 
 //Loops the list to add new projects to the sidebar
 const loopProjects = (project) => {
@@ -89,6 +106,7 @@ const loopTasks = (task) => {
     taskSide.appendChild(taskSideLeft);
     taskSide.appendChild(taskSideRight);
     let taskCompletion = document.createElement("div");
+    taskCompletion.value = task.id;
     taskCompletion.textContent = "✔";
     if (task.complete === true){
         taskCompletion.classList.add("taskCompletionTrue");
@@ -96,6 +114,7 @@ const loopTasks = (task) => {
     else if (task.complete === false){
         taskCompletion.classList.add("taskCompletionFalse");
     }
+    taskCompletion.classList.add("completionStatus");
     taskSideLeft.appendChild(taskCompletion);
     let taskTitle = document.createElement("div");
     taskTitle.classList.add("taskTitle");
@@ -185,6 +204,7 @@ addProjectAddBtn.addEventListener("click", (e) => {
     createProjectTitle();
     cleanOldTasks();
     list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
+    addEventListenerToTaskCompletion();
     cleanOldProjectsSidebar();
     //add projects back to sidebar
     list.projects.forEach(loopProjects);
@@ -236,6 +256,7 @@ deleteProjectDeleteBtn.addEventListener("click", () => {
     else {
         createProjectTitle();
         list.projects[0].tasks.forEach(loopTasks);
+        addEventListenerToTaskCompletion();
     }
     addSelectedProjectAfterAddingNewProject();
 });
@@ -248,4 +269,10 @@ const deleteSideContent = () => {
     sideContent.innerHTML = "";
 }
 
-export { loopProjects, loopTasks, addEventListenerToProjects, createProjectTitle, addSelectedProjectPageLoad };
+// Next is finishing DOM manipulation for tasks and then I just need to
+// add some sort of storing data technique for saved projects to persist
+// through reloads.
+// I also need to keep in mind to make an event listener for marking tasks
+// as completed! 
+
+export { loopProjects, loopTasks, addEventListenerToProjects, createProjectTitle, addSelectedProjectPageLoad, addEventListenerToTaskCompletion };
