@@ -103,6 +103,7 @@ list.createProject("Example Project 2");
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   addEventListenerToDeleteTaskButtons: () => (/* binding */ addEventListenerToDeleteTaskButtons),
+/* harmony export */   addEventListenerToEditTaskBtns: () => (/* binding */ addEventListenerToEditTaskBtns),
 /* harmony export */   addEventListenerToProjects: () => (/* binding */ addEventListenerToProjects),
 /* harmony export */   addEventListenerToTaskCompletion: () => (/* binding */ addEventListenerToTaskCompletion),
 /* harmony export */   addEventListenerToViewTasks: () => (/* binding */ addEventListenerToViewTasks),
@@ -141,7 +142,11 @@ const viewTaskDescriptionValue = document.querySelector("#viewTaskDescriptionVal
 const viewPriorityValue = document.querySelector("#viewPriorityValue");
 const viewTaskExitBtn = document.querySelector("#viewTaskDiv > button");
 const addTask = document.querySelector("#addTask");
+const addTaskAddBtn = document.querySelector("#addTaskAddBtn");
+const addTaskCancelBtn = document.querySelector("#addTaskCancelBtn");
 const editTask = document.querySelector("#editTask");
+const editTaskAddBtn = document.querySelector("#editTaskAddBtn");
+const editTaskCancelBtn = document.querySelector("#editTaskCancelBtn");
 const deleteTask = document.querySelector("#deleteTask");
 let deleteTaskButtons = document.querySelectorAll('.rightSideTask > img[src="img/delete.png"]');
 const deleteTaskDeleteBtn = document.querySelector("#deleteTaskDeleteBtn");
@@ -189,6 +194,7 @@ const addEventListenerToProjects = () => {
         cleanOldTasks();
         _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
         addEventListenerToViewTasks();
+        addEventListenerToEditTaskBtns();
         addEventListenerToDeleteTaskButtons();
         addEventListenerToTaskCompletion();
         createProjectTitle();
@@ -211,6 +217,7 @@ const addEventListenerToTaskCompletion = () => {
         cleanOldTasks();
         _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
         addEventListenerToViewTasks();
+        addEventListenerToEditTaskBtns();   
         addEventListenerToDeleteTaskButtons();
         addEventListenerToTaskCompletion();
     }))
@@ -395,6 +402,7 @@ deleteProjectDeleteBtn.addEventListener("click", () => {
         createProjectTitle();
         _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[0].tasks.forEach(loopTasks);
         addEventListenerToViewTasks();
+        addEventListenerToEditTaskBtns();
         addEventListenerToTaskCompletion();
         addEventListenerToDeleteTaskButtons();
     }
@@ -452,13 +460,147 @@ const addEventListenerToAddTaskBtn = () => {
     addTaskButton = document.querySelector(".addTaskButton");
     addTaskButton.addEventListener("click",() =>{
         addTask.showModal();
-
     })
 }
 
+document.querySelector("#dueDate").addEventListener("click",() =>{
+    if(document.querySelector("#dueDate").checked){
+        document.querySelector("#dueDateSelector").removeAttribute("disabled");
+    }
+    else {
+        document.querySelector("#dueDateSelector").setAttribute("disabled","");
+        document.querySelector("#dueDateSelector").value = "";
+    };
+});
 
-// editTask
+document.querySelector("#editDueDate").addEventListener("click",() =>{
+    if(document.querySelector("#editDueDate").checked){
+        document.querySelector("#editDueDateSelector").removeAttribute("disabled");
+    }
+    else {
+        document.querySelector("#editDueDateSelector").setAttribute("disabled","");
+        document.querySelector("#editDueDateSelector").value = "";
+    };
+});
 
+addTaskAddBtn.addEventListener("click",(e)=>{
+    e.preventDefault();
+    addTask.close();
+    let dueDate;
+    if(!document.querySelector("#dueDateSelector").value){
+        dueDate = "N/A";
+    }
+    else if(document.querySelector("#dueDateSelector").value){
+        dueDate = document.querySelector("#dueDateSelector").value.split("-").reverse().join("-");
+    }
+    let priority;
+    if (document.querySelector('#addTask > form > div > select').value === "low"){
+        priority = "Low";
+    }
+    else if(document.querySelector('#addTask > form > div > select').value === "mid"){
+        priority = "Medium";
+    }
+    else if(document.querySelector('#addTask > form > div > select').value === "high"){
+        priority = "High";
+    }
+    _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].createTask(document.querySelector("#taskName").value,document.querySelector("#taskDescription").value,dueDate,priority);
+    cleanOldTasks();
+    _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
+    addEventListenerToViewTasks();
+    addEventListenerToEditTaskBtns();
+    addEventListenerToDeleteTaskButtons();
+    addEventListenerToTaskCompletion();
+    resetAddTaskFields();
+})
+
+addTaskCancelBtn.addEventListener("click",()=>{
+    addTask.close();
+    resetAddTaskFields();
+})
+
+const resetAddTaskFields = () =>{
+    document.querySelector("#taskName").value = "";
+    document.querySelector("#dueDateSelector").value = "";
+    document.querySelector("#dueDateSelector").setAttribute("disabled","");
+    document.querySelector("#taskDescription").value = "";
+    document.querySelectorAll('#addTask > form > div > select > option').forEach(option => option.removeAttribute("selected","selected"));
+    document.querySelector('#addTask > form > div > select > option[value="low"]').setAttribute("selected","selected");
+}
+
+const addEventListenerToEditTaskBtns = () => {
+    let selectedTask;
+    let editTaskButton = document.querySelectorAll('.rightSideTask > img[src="img/edit.png"]');
+    editTaskButton.forEach(btn => btn.addEventListener("click",() => {
+        editTask.showModal();
+        _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks.forEach(task => {
+            if(task.id === btn.value){
+                selectedTask = task;
+                selectedTaskIndex = _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks.indexOf(selectedTask);
+                document.querySelector("#editTaskName").value = task.title;
+                if(task.dueDate == "N/A"){
+                    document.querySelector("#editDueDate").removeAttribute("checked");
+                    document.querySelector("#editDueDateSelector").value = "";
+                }
+                else{
+                    document.querySelector("#editDueDate").setAttribute("checked","");
+                    document.querySelector("#editDueDateSelector").value = task.dueDate.split("-").reverse().join("-");
+                    document.querySelector("#editDueDateSelector").removeAttribute("disabled");
+                }
+                document.querySelector("#editTaskDescription").value = task.description;
+                if (task.priority === "High"){
+                    document.querySelectorAll("#editPriority > option").forEach(option => option.removeAttribute("selected"));
+                    document.querySelector('#editPriority > option[value="high"]').setAttribute("selected","selected");
+                }
+                else if(task.priority === "Medium"){
+                    document.querySelectorAll("#editPriority > option").forEach(option => option.removeAttribute("selected"));
+                    document.querySelector('#editPriority > option[value="mid"]').setAttribute("selected","selected");
+                }
+                else if(task.priority === "Low"){
+                    document.querySelectorAll("#editPriority > option").forEach(option => option.removeAttribute("selected"));
+                    document.querySelector('#editPriority > option[value="low"]').setAttribute("selected","selected");
+                }
+            }
+        })
+    }))
+}
+
+
+editTaskAddBtn.addEventListener("click",(e)=>{
+    e.preventDefault();
+    editTask.close();
+    let dueDate;
+    if(!document.querySelector("#editDueDateSelector").value){
+        dueDate = "N/A";
+    }
+    else if(document.querySelector("#editDueDateSelector").value){
+        dueDate = document.querySelector("#editDueDateSelector").value.split("-").reverse().join("-");
+    }
+    let priority;
+    if (document.querySelector('#editTask > form > div > select').value === "low"){
+        priority = "Low";
+    }
+    else if(document.querySelector('#editTask > form > div > select').value === "mid"){
+        priority = "Medium";
+    }
+    else if(document.querySelector('#editTask > form > div > select').value === "high"){
+        priority = "High";
+    }
+    _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks[selectedTaskIndex].changeTitle(document.querySelector("#editTaskName").value);
+    _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks[selectedTaskIndex].changeDescription(document.querySelector("#editTaskDescription").value);
+    _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks[selectedTaskIndex].changeDueDate(dueDate);
+    _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks[selectedTaskIndex].changePriority(priority);
+    cleanOldTasks();
+    _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
+    addEventListenerToViewTasks();
+    addEventListenerToEditTaskBtns();
+    addEventListenerToDeleteTaskButtons();
+    addEventListenerToTaskCompletion();
+    resetAddTaskFields();
+})
+
+editTaskCancelBtn.addEventListener("click",() => {
+    editTask.close();
+})
 
 const addEventListenerToDeleteTaskButtons = () => {
     deleteTaskButtons = document.querySelectorAll('.rightSideTask > img[src="img/delete.png"]');
@@ -471,7 +613,6 @@ const addEventListenerToDeleteTaskButtons = () => {
             }
         })
         selectedTaskIndex = _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks.indexOf(selectedTask);
-        console.log(selectedTaskIndex);
     }))
 }
 
@@ -565,6 +706,7 @@ _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[0].tasks.forEach(_dom_
 (0,_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.addEventListenerToTaskCompletion)();
 (0,_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.addEventListenerToViewTasks)();
 (0,_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.addEventListenerToDeleteTaskButtons)();
+(0,_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.addEventListenerToEditTaskBtns)();
 })();
 
 /******/ })()
