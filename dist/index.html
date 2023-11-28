@@ -46,22 +46,20 @@
         </dialog>
         <dialog id="addTask">
             <form action="#" method="post">
-                <div>
+                <div id="taskNameDiv">
                     <label for="taskName">Task Name</label>
                     <input id="taskName" type="text" minlength="3" maxlength="45">
                 </div>
-                <div>
+                <div id="dueDateDiv">
                     <label for="dueDate">Due Date</label>
                     <input id="dueDate" type="checkbox">
-                </div>
-                <div>
                     <input id="dueDateSelector" type="date" disabled>
                 </div>
-                <div>
+                <div id="taskDescriptionDiv">
                     <label for="taskDescription">Task Description</label>
                     <textarea id="taskDescription" maxlength="455"></textarea>
                 </div>
-                <div>
+                <div id="priorityDiv">
                     <label for="priority">Priority</label>
                     <select name="priority" id="priority">
                         <option value="low" selected="selected">Low Priority</option>
@@ -69,7 +67,7 @@
                         <option value="high">High Priority</option>
                     </select>
                 </div>
-                <div>
+                <div id="addButtons">
                     <button id="addTaskAddBtn" type="submit">Add</button>
                     <button id="addTaskCancelBtn" type="button">Cancel</button>
                 </div>
@@ -77,22 +75,20 @@
         </dialog>
         <dialog id="editTask">
             <form action="#" method="post">
-                <div>
+                <div id="editTaskNameDiv">
                     <label for="editTaskName">Task Name</label>
                     <input id="editTaskName" type="text" minlength="3" maxlength="45">
                 </div>
-                <div>
+                <div id="editDueDateDiv">
                     <label for="editDueDate">Due Date</label>
                     <input id="editDueDate" type="checkbox">
-                </div>
-                <div>
                     <input id="editDueDateSelector" type="date" disabled>
                 </div>
-                <div>
+                <div id="editTaskDescriptionDiv">
                     <label for="editTaskDescription">Task Description</label>
                     <textarea id="editTaskDescription" maxlength="455"></textarea>
                 </div>
-                <div>
+                <div id="editPriorityDiv">
                     <label for="editPriority">Priority</label>
                     <select name="editPriority" id="editPriority">
                         <option value="low" selected="selected">Low Priority</option>
@@ -100,7 +96,7 @@
                         <option value="high">High Priority</option>
                     </select>
                 </div>
-                <div>
+                <div id="editButtons">
                     <button id="editTaskAddBtn" type="submit">Edit</button>
                     <button id="editTaskCancelBtn" type="button">Cancel</button>
                 </div>

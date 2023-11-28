@@ -375,6 +375,17 @@ body,html {
     border-radius: 10px;
 }
 
+#addTask,
+#editTask {
+    width: 80vw;
+    height: 85vh;
+    background-color: rgb(35, 35, 35);
+    color: whitesmoke;
+    border: 0px;
+    padding: 30px;
+    border-radius: 10px;
+}
+
 #viewTaskDiv {
     height: 100%;
     display: grid;
@@ -426,6 +437,10 @@ body,html {
     justify-content: center;
 }
 
+#priorityDiv {
+    grid-area: priority;
+}
+
 #viewPriorityValue {
     text-align: center;
 }
@@ -450,4 +465,151 @@ body,html {
     height: 75%;
     border-radius: 15px;
     padding: 15px 10px;
+}
+
+#addTask > form,
+#editTask > form{
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 3fr 1fr;
+    grid-template-areas: 
+    "name date"
+    "description description"
+    "priority buttons";
+    gap: 15px;
+}
+
+#taskNameDiv,
+#editTaskNameDiv{
+    grid-area: name;
+    display: grid;
+    grid-template-rows: 48px 1fr;
+    font-size: 40px;
+    color: rgb(141, 141, 141);
+}
+
+#taskName,
+#editTaskName{
+    margin-top: 15px;
+    font-size: 40px;
+    background-color: rgb(61, 61, 61);
+    border-radius: 15px;
+    padding: 10px 10px;
+    border: 0px;
+    color: whitesmoke;
+}
+
+#dueDateDiv,
+#editDueDateDiv{
+    grid-area: date;
+    display: grid;
+    grid-template-columns: 1fr 48px;
+    grid-template-rows: 48px 1fr;
+    grid-template-areas:
+    "label checkbox"
+    "date date";
+}
+
+#priorityDiv,
+#editPriorityDiv{
+    grid-area: priority;
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    font-size: 40px;
+    color: rgb(141, 141, 141);
+    align-items: center;
+}
+
+#priorityDiv > select,
+#editPriorityDiv > select{
+    font-size: 30px;
+    background-color: rgb(61, 61, 61);
+    border-radius: 15px;
+    padding: 10px 10px;
+    border: 0px;
+    color: whitesmoke;
+}
+
+#dueDateDiv > label,
+#editDueDateDiv > label {
+    font-size: 40px;
+    color: rgb(141, 141, 141);
+    grid-area: label;
+}
+
+#dueDate,
+#editDueDate {
+    grid-area: checkbox;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+#dueDateSelector,
+#editDueDateSelector{
+    grid-area: date;
+    margin-top: 15px;
+    font-size: 40px;
+    background-color: rgb(61, 61, 61);
+    border-radius: 15px;
+    padding: 10px 10px;
+    border: 0px;
+    color: whitesmoke;
+    cursor: pointer;
+}
+
+
+#taskDescriptionDiv > label,
+#editTaskDescriptionDiv >label{
+    font-size: 40px;
+    color: rgb(141, 141, 141);
+}
+
+#taskDescriptionDiv,
+#editTaskDescriptionDiv{
+    grid-area: description;
+    display: grid;
+    grid-template-rows: 1fr 8fr;
+}
+
+#taskDescription,
+#editTaskDescription{
+    margin-top: 15px;
+    font-size: 30px;
+    background-color: rgb(61, 61, 61);
+    border-radius: 15px;
+    padding: 15px 10px;
+    border: 0px;
+    color: whitesmoke;
+}
+
+#addButtons,
+#editButtons{
+    grid-area: buttons;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+    align-items: center;
+}
+
+
+#addButtons > button,
+#editButtons > button{
+    font-size: 30px;
+    color: whitesmoke;
+    border-style: none;
+    border-radius: 10px;
+    font-size: 30px;
+    padding: 10px 30px;
+    cursor: pointer;
+}
+
+#addTaskAddBtn,
+#editTaskAddBtn{
+    background-color: green;
+}
+
+#addTaskCancelBtn,
+#editTaskCancelBtn{
+    background-color: darkred;
 }
