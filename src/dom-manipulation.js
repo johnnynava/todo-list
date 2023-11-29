@@ -227,6 +227,7 @@ addProjectAddBtn.addEventListener("click", (e) => {
     }
     e.preventDefault();
     list.createProject(addProjectInput.value);
+    localStorage.setItem("list", JSON.stringify(list));
     addProject.close();
     addProjectInput.value = "";
     selectedProjectIndex = list.projects.length-1;
@@ -257,6 +258,7 @@ editProjectAddBtn.addEventListener("click", (e) => {
     editProject.close();
     projectTitle.textContent = editProjectInput.value;
     list.projects[selectedProjectIndex].name = editProjectInput.value;
+    localStorage.setItem("list", JSON.stringify(list));
     cleanOldProjectsSidebar();
     list.projects.forEach(loopProjects);
     addEventListenerToProjects();
@@ -274,6 +276,7 @@ deleteProjectBtn.addEventListener("click", () => {
 
 deleteProjectDeleteBtn.addEventListener("click", () => {
     list.projects.splice(selectedProjectIndex, 1);
+    localStorage.setItem("list", JSON.stringify(list));
     cleanOldProjectsSidebar();
     list.projects.forEach(loopProjects);
     addEventListenerToProjects();
@@ -389,6 +392,7 @@ addTaskAddBtn.addEventListener("click",(e)=>{
         priority = "High";
     }
     list.projects[selectedProjectIndex].createTask(document.querySelector("#taskName").value,document.querySelector("#taskDescription").value,dueDate,priority);
+    localStorage.setItem("list", JSON.stringify(list));
     cleanOldTasks();
     list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
     addEventListenerToViewTasks();
@@ -474,6 +478,7 @@ editTaskAddBtn.addEventListener("click",(e)=>{
     list.projects[selectedProjectIndex].tasks[selectedTaskIndex].changeDescription(document.querySelector("#editTaskDescription").value);
     list.projects[selectedProjectIndex].tasks[selectedTaskIndex].changeDueDate(dueDate);
     list.projects[selectedProjectIndex].tasks[selectedTaskIndex].changePriority(priority);
+    localStorage.setItem("list", JSON.stringify(list));
     cleanOldTasks();
     list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
     addEventListenerToViewTasks();
@@ -504,6 +509,7 @@ const addEventListenerToDeleteTaskButtons = () => {
 deleteTaskDeleteBtn.addEventListener("click",()=>{
     deleteTask.close();
     list.projects[selectedProjectIndex].tasks.splice(selectedTaskIndex,1);
+    localStorage.setItem("list", JSON.stringify(list));
     cleanOldTasks();
     list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
     addEventListenerToViewTasks();

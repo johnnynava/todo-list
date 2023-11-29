@@ -492,7 +492,7 @@ body,html {
 #taskName,
 #editTaskName{
     margin-top: 15px;
-    font-size: 40px;
+    font-size: 30px;
     background-color: rgb(61, 61, 61);
     border-radius: 15px;
     padding: 10px 10px;
@@ -549,7 +549,7 @@ body,html {
 #editDueDateSelector{
     grid-area: date;
     margin-top: 15px;
-    font-size: 40px;
+    font-size: 30px;
     background-color: rgb(61, 61, 61);
     border-radius: 15px;
     padding: 10px 10px;

@@ -82,17 +82,28 @@ class List {
     }
 }
 
-//created new project example
-let list = new List();
-list.createProject("Example Project");
-//created new task example
-list.projects[0].createTask("Example Task 1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut etiam sit amet nisl purus in mollis nunc. Tincidunt id aliquet risus feugiat in ante metus dictum at. Egestas fringilla phasellus faucibus scelerisque eleifend donec. At ultrices mi tempus imperdiet nulla malesuada. Adipiscing commodo elit at imperdiet dui accumsan sit amet. At erat pellentesque adipiscing commodo.","25-12-2023","High");
-//set task as complete example
-list.projects[0].tasks[0].toggleComplete();
-//create other example tasks
-list.projects[0].createTask("Example Task 2", "This is just another example","28-12-2023","Medium");
-list.projects[0].createTask("Example Task 3", "","N/A","Low");
-list.createProject("Example Project 2");
+let list;
+
+// if (!localStorage.list){
+    // created new project example
+    list = new List();
+    list.createProject("Example Project");
+    //created new task example
+    list.projects[0].createTask("Example Task 1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut etiam sit amet nisl purus in mollis nunc. Tincidunt id aliquet risus feugiat in ante metus dictum at. Egestas fringilla phasellus faucibus scelerisque eleifend donec. At ultrices mi tempus imperdiet nulla malesuada. Adipiscing commodo elit at imperdiet dui accumsan sit amet. At erat pellentesque adipiscing commodo.","25-12-2023","High");
+    //set task as complete example
+    list.projects[0].tasks[0].toggleComplete();
+    //create other example tasks
+    list.projects[0].createTask("Example Task 2", "This is just another example","28-12-2023","Medium");
+    list.projects[0].createTask("Example Task 3", "","N/A","Low");
+    list.createProject("Example Project 2");
+//     localStorage.setItem("Project",JSON.stringify(Project));
+//     localStorage.setItem("Task",JSON.stringify(Task));
+//     localStorage.setItem("list", JSON.stringify(list));
+// }
+
+// else{
+//     list = JSON.parse(localStorage.list);
+// }
 
 
 
@@ -342,6 +353,7 @@ addProjectAddBtn.addEventListener("click", (e) => {
     }
     e.preventDefault();
     _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.createProject(addProjectInput.value);
+    localStorage.setItem("list", JSON.stringify(_todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list));
     addProject.close();
     addProjectInput.value = "";
     selectedProjectIndex = _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects.length-1;
@@ -372,6 +384,7 @@ editProjectAddBtn.addEventListener("click", (e) => {
     editProject.close();
     projectTitle.textContent = editProjectInput.value;
     _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].name = editProjectInput.value;
+    localStorage.setItem("list", JSON.stringify(_todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list));
     cleanOldProjectsSidebar();
     _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects.forEach(loopProjects);
     addEventListenerToProjects();
@@ -389,6 +402,7 @@ deleteProjectBtn.addEventListener("click", () => {
 
 deleteProjectDeleteBtn.addEventListener("click", () => {
     _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects.splice(selectedProjectIndex, 1);
+    localStorage.setItem("list", JSON.stringify(_todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list));
     cleanOldProjectsSidebar();
     _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects.forEach(loopProjects);
     addEventListenerToProjects();
@@ -504,6 +518,7 @@ addTaskAddBtn.addEventListener("click",(e)=>{
         priority = "High";
     }
     _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].createTask(document.querySelector("#taskName").value,document.querySelector("#taskDescription").value,dueDate,priority);
+    localStorage.setItem("list", JSON.stringify(_todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list));
     cleanOldTasks();
     _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
     addEventListenerToViewTasks();
@@ -589,6 +604,7 @@ editTaskAddBtn.addEventListener("click",(e)=>{
     _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks[selectedTaskIndex].changeDescription(document.querySelector("#editTaskDescription").value);
     _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks[selectedTaskIndex].changeDueDate(dueDate);
     _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks[selectedTaskIndex].changePriority(priority);
+    localStorage.setItem("list", JSON.stringify(_todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list));
     cleanOldTasks();
     _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
     addEventListenerToViewTasks();
@@ -619,6 +635,7 @@ const addEventListenerToDeleteTaskButtons = () => {
 deleteTaskDeleteBtn.addEventListener("click",()=>{
     deleteTask.close();
     _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks.splice(selectedTaskIndex,1);
+    localStorage.setItem("list", JSON.stringify(_todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list));
     cleanOldTasks();
     _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[selectedProjectIndex].tasks.forEach(loopTasks);
     addEventListenerToViewTasks();
@@ -698,6 +715,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// console.log(list.projects[0].tasks[0]);
+// console.log(list.projects[0].tasks[0].toggleComplete());
+// console.log(list.projects[0].tasks[0]);
 _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects.forEach(_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.loopProjects);
 (0,_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.addEventListenerToProjects)();
 _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[0].tasks.forEach(_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.loopTasks);
@@ -707,6 +727,16 @@ _todo_logic_js__WEBPACK_IMPORTED_MODULE_0__.list.projects[0].tasks.forEach(_dom_
 (0,_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.addEventListenerToViewTasks)();
 (0,_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.addEventListenerToDeleteTaskButtons)();
 (0,_dom_manipulation_js__WEBPACK_IMPORTED_MODULE_1__.addEventListenerToEditTaskBtns)();
+
+
+//web storage api considerations
+
+//when I:
+//Add, delete or edit a project
+//Add, delete or edit a task
+
+//when there's no storage, prepopulate list
+//if there's storage, use user values
 })();
 
 /******/ })()

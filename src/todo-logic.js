@@ -71,16 +71,27 @@ class List {
     }
 }
 
-//created new project example
-let list = new List();
-list.createProject("Example Project");
-//created new task example
-list.projects[0].createTask("Example Task 1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut etiam sit amet nisl purus in mollis nunc. Tincidunt id aliquet risus feugiat in ante metus dictum at. Egestas fringilla phasellus faucibus scelerisque eleifend donec. At ultrices mi tempus imperdiet nulla malesuada. Adipiscing commodo elit at imperdiet dui accumsan sit amet. At erat pellentesque adipiscing commodo.","25-12-2023","High");
-//set task as complete example
-list.projects[0].tasks[0].toggleComplete();
-//create other example tasks
-list.projects[0].createTask("Example Task 2", "This is just another example","28-12-2023","Medium");
-list.projects[0].createTask("Example Task 3", "","N/A","Low");
-list.createProject("Example Project 2");
+let list;
+
+// if (!localStorage.list){
+    // created new project example
+    list = new List();
+    list.createProject("Example Project");
+    //created new task example
+    list.projects[0].createTask("Example Task 1", "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Sodales ut etiam sit amet nisl purus in mollis nunc. Tincidunt id aliquet risus feugiat in ante metus dictum at. Egestas fringilla phasellus faucibus scelerisque eleifend donec. At ultrices mi tempus imperdiet nulla malesuada. Adipiscing commodo elit at imperdiet dui accumsan sit amet. At erat pellentesque adipiscing commodo.","25-12-2023","High");
+    //set task as complete example
+    list.projects[0].tasks[0].toggleComplete();
+    //create other example tasks
+    list.projects[0].createTask("Example Task 2", "This is just another example","28-12-2023","Medium");
+    list.projects[0].createTask("Example Task 3", "","N/A","Low");
+    list.createProject("Example Project 2");
+//     localStorage.setItem("Project",JSON.stringify(Project));
+//     localStorage.setItem("Task",JSON.stringify(Task));
+//     localStorage.setItem("list", JSON.stringify(list));
+// }
+
+// else{
+//     list = JSON.parse(localStorage.list);
+// }
 
 export { list };
