@@ -1,6 +1,6 @@
 # Todo list
 
-[Live Demo]([https://pages.github.com/](https://johnnynava.github.io/todo-list))
+[Live Demo](https://johnnynava.github.io/todo-list)
 
 Todo list made from scratch with pure Javascript.
 
