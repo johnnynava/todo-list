@@ -1,7 +1,5 @@
-Todo list in progress.
+# Todo list
 
-My most ambitious and time-consuming project to date I think. This took a while.
+Todo list made from scratch with pure Javascript.
 
-Still need to implement localStorage.
-
-Note: look into either re-creating a list with values saved from LocalStorage or save the "List" object to a value in localStorage and then play with prototypes for subclasses (this is probably better)
+I started making this before learning about TDD properly and other things so the code is not the prettiest.
