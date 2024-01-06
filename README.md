@@ -8,6 +8,9 @@ Todo list I made from scratch with pure Javascript.
 <br>
 <br>
 The application allows you to add new projects, delete projects, edit projects, add tasks to each project, deadlines, descriptions, etc.
+<br>
+<br>
+It uses the Web Storage API (localStorage) to save information.
 
 ## Primary technologies used
 • Javascript
@@ -15,6 +18,8 @@ The application allows you to add new projects, delete projects, edit projects, 
 • HTML
 <br>
 • CSS
+<br>
+• Web Storage API
 
 ## Other technologies/tools used
 • Webpack
